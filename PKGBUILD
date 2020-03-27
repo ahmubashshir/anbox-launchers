@@ -1,6 +1,6 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=anbox-launchers-git
-pkgver=1
+pkgver=r3.f0c85b8
 pkgrel=1
 pkgdesc="Add Anbox App Launchers to Anbox Category in Desktop Menu."
 arch=('any')
@@ -21,6 +21,13 @@ source=('anbox-android.directory'
 		'anbox-launchers.timer'
 		'Makefile')
 validpgpkeys=()
+pkgver()
+{
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
 package() {
 	make DESTDIR="$pkgdir/" install
 }
