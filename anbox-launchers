@@ -1,0 +1,21 @@
+#!/bin/env python3
+from xdg.DesktopEntry import DesktopEntry as parser
+from os import environ
+from os.path import exists, isdir, join, isfile
+from glob import glob
+path = join(environ['XDG_DATA_HOME'], 'applications', 'anbox') \
+	if 'XDG_DATA_HOME' in environ.keys() \
+	else \
+	join(environ['HOME'], '.local', 'share', 'applications', 'anbox')
+if exists(path) and isdir(path):
+	for launcher in glob(join(path,'*.desktop')):
+		if not ( exists(launcher) and isfile(launcher) ):
+			continue
+		file = parser(filename=launcher)
+		categories = file.getCategories()
+		if 'Anbox' not in categories:
+			categories.insert(0,'Anbox')
+			categories.append('')
+			file.set('Categories',';'.join(categories))
+			if exists(launcher) and isfile(launcher):
+				file.write()

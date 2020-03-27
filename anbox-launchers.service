@@ -1,0 +1,11 @@
+[Unit]
+Description=Anbox Desktop Entry Categories Fixer.
+Requires=anbox-session-manager.service
+After=anbox-session-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/anbox/anbox-launchers
+
+[Install]
+WantedBy=graphical-session.target
