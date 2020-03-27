@@ -1,6 +1,6 @@
-# Maintainer: Your Name <youremail@domain.com>
+# Maintainer: Ahmad Hasan Mubashshir <ahmubashshir@gmail.com>
 pkgname=anbox-launchers-git
-pkgver=r5.c23a6cc
+pkgver=r6.4b1d305
 pkgrel=1
 pkgdesc="Add Anbox App Launchers to Anbox Category in Desktop Menu."
 arch=('any')
