@@ -36,5 +36,5 @@ pkgver()
   pkgrel=$(git diff --shortstat|cut -d' ' -f2)
 }
 package() {
-	make DESTDIR="$pkgdir/" install
+	make DESTDIR="$pkgdir/" SYSCONFDIR=/etc install
 }
