@@ -1,3 +1,5 @@
 pkg/
 src/
 *.pkg.*
+PKGBUILD
+anbox-launchers.install

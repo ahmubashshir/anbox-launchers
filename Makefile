@@ -3,25 +3,29 @@ LIBDIR:=
 DESTDIR:=
 SYSCONFDIR:=
 ifneq ($(DESTDIR),)
-	prefix:=usr
-	_LIBDIR=/$(prefix)/lib
-	LIBDIR:=$(DESTDIR)/$(prefix)/lib
-	SYSCONFDIR:=/$(prefix)/etc
+	prefix:=/usr
+	_prefix=$(DESTDIR)$(prefix)
+	LIBDIR:=$(prefix)/lib
+	_LIBDIR=$(DESTDIR)$(LIBDIR)
+	SYSCONFDIR:=$(prefix)/etc
+	_SYSCONFDIR=$(DESTDIR)$(SYSCONFDIR)
 else
 	prefix:=/usr/local
+	_prefix=$(prefix)
 	LIBDIR:=$(prefix)/lib
-	_LIBDIR=$(prefix)/lib
+	_LIBDIR=$(LIBDIR)
 	SYSCONFDIR:=$(prefix)/etc
+	_SYSCONFDIR=$(SYSCONFDIR)
 endif
 all:
 install: install-all configure reload
 uninstall: deconfigure  remove reload
 install-all:
-	install -m 644 -Dt $(LIBDIR)/systemd/user anbox-launchers.service anbox-launchers.timer
-	sed -i "s|@PREFIX@|$(_LIBDIR)|" $(LIBDIR)/systemd/user/anbox-launchers.service
-	install -m 644 -Dt $(SYSCONFDIR)/xdg/menus/applications-merged anbox-android.menu
-	install -m 644 -Dt $(prefix)/share/desktop-directories anbox-android.directory
-	install -m 755 -Dt $(LIBDIR)/anbox anbox-launchers
+	install -m 644 -Dt $(_LIBDIR)/systemd/user anbox-launchers.service anbox-launchers.timer
+	sed -i "s|@PREFIX@|$(LIBDIR)|" $(_LIBDIR)/systemd/user/anbox-launchers.service
+	install -m 644 -Dt $(_SYSCONFDIR)/xdg/menus/applications-merged anbox-android.menu
+	install -m 644 -Dt $(_prefix)/share/desktop-directories anbox-android.directory
+	install -m 755 -Dt $(_LIBDIR)/anbox anbox-launchers
 configure:
 	if [ -z "$(DESTDIR)" ];then systemctl --user --global enable anbox-launchers.service anbox-launchers.timer;fi
 deconfigure:
