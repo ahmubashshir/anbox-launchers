@@ -8,4 +8,4 @@ OnUnitInactiveSec=30
 RemainAfterElapse=False
 
 [Install]
-WantedBy=default.target timers.target anbox-session-manager.service
+WantedBy=default.target timers.target
