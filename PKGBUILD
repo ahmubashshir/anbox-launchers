@@ -1,6 +1,6 @@
 # Maintainer: Ahmad Hasan Mubashshir <ahmubashshir@gmail.com>
 pkgname=anbox-launchers-git
-pkgver=r6.4b1d305
+pkgver=r9.8860051
 pkgrel=1
 pkgdesc="Add Anbox App Launchers to Anbox Category in Desktop Menu."
 arch=('any')

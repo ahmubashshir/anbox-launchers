@@ -8,4 +8,4 @@ Type=oneshot
 ExecStart=@PREFIX@/anbox/anbox-launchers
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=default.target anbox-session-manager.service
