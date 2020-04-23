@@ -18,6 +18,8 @@ else
 	_SYSCONFDIR=$(SYSCONFDIR)
 endif
 all:
+	@echo run ⌵ to install anbox-launchers.
+	@echo '"make install prefix=/usr"'
 install: install-all configure reload
 uninstall: deconfigure  remove reload
 install-all:
