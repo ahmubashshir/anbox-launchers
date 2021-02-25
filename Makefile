@@ -29,9 +29,9 @@ install-all:
 	install -m 644 -Dt $(_prefix)/share/desktop-directories anbox-android.directory
 	install -m 755 -Dt $(_LIBDIR)/anbox anbox-launchers
 configure:
-	if [ -z "$(DESTDIR)" ];then systemctl --user --global enable anbox-launchers.service anbox-launchers.timer;fi
+	if [ -z "$(DESTDIR)" ];then systemctl --user --global enable anbox-launchers.timer;fi
 deconfigure:
-	if [ -z "$(DESTDIR)" ];then systemctl --user --global disable anbox-launchers.service anbox-launchers.timer;fi
+	if [ -z "$(DESTDIR)" ];then systemctl --user --global disable anbox-launchers.timer;fi
 reload:
 	@if [ -z "$(DESTDIR)" ];then echo "Run \"systemctl --user daemon-reload\" now.";fi
 remove:
